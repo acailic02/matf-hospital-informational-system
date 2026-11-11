@@ -1,0 +1,87 @@
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[serbian]{babel}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{microtype}
+\usepackage[hidelinks]{hyperref}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{caption}
+\usepackage{geometry}
+\geometry{
+ a4paper,
+ left=25mm,
+ top=25mm,
+ right=25mm,
+ bottom=25mm
+}
+\captionsetup[figure]{font=small}
+\graphicspath{{./images/}}
+
+\AddToHook{cmd/section/before}{\clearpage}
+
+\sloppy
+ 
+\begin{document}
+
+\begin{titlepage}
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}} 
+
+\center 
+\textsc{\LARGE Matematički fakultet, Univerzitet u Beogradu}\\[1.5cm]
+\textsc{\Large Informacioni sistemi}\\[0.5cm] 
+\textsc{\large Dokumentacija}\\[0.5cm] 
+
+\HRule \\[0.4cm]
+{ \huge \bfseries Informacioni sistem bolnice}\\[0.4cm] 
+\HRule \\[1.5cm]
+ 
+\begin{minipage}{0.4\textwidth}
+    \begin{flushleft} \large
+    \emph{Studenti:}\\
+        Pavlović Petar 1103/2026\\
+        Ilić Aleksandar 1107/2026\\
+        Mirković Milena 1116/2026\\
+        Trifunović Mihajlo 1136/2026
+    \end{flushleft}
+\end{minipage}
+~
+\begin{minipage}{0.4\textwidth}
+    \begin{flushright} \large
+    \emph{Mentori:} \\
+        prof dr Malkov Saša\\
+        Milojković Dara\\
+        Katedra za računarstvo i informatiku
+    \end{flushright}
+\end{minipage}\\[2cm]
+
+{\large Novembar 2026}\\[2cm] 
+\includegraphics[width=0.4\textwidth]{matf_logo.png}\\[1cm]
+
+\vfill 
+\end{titlepage}
+
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt}
+
+
+\tableofcontents
+
+\section{Uvod}
+
+\section{Opis}
+
+\section{Učesnici}
+
+\section{Alati}
+
+\section{Dijagram slučajeva upotrebe}
+
+
+
+\end{document}
+
