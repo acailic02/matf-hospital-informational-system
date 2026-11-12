@@ -7,23 +7,15 @@ Postuslovi (Neuspeh): Korisniku je prikazana poruka o grešci i ostaje na ekranu
 
 Osnovni tok:
 
-Korisnik pokreće opciju za prijavu.
-
-Sistem učitava i prikazuje ekran (formu) za prijavu.
-
-Korisnik unosi korisničko ime i lozinku, a zatim potvrđuje unos.
-
-Sistem prosleđuje unete podatke kontroloru na proveru.
-
-Kontroler šalje upit bazi podataka za proveru unetih pristupnih podataka.
-
-Baza podataka vraća podatke o korisniku.
-
-Sistem validira podatke i uspešno proverava ispravnost.
-
-Sistem otvara i prikazuje korisnički profil.
-
-Sistem obaveštava korisnika da je prijava uspešna.
+1. Korisnik pokreće opciju za prijavu.
+2. Sistem učitava i prikazuje ekran (formu) za prijavu.
+3. Korisnik unosi korisničko ime i lozinku, a zatim potvrđuje unos.
+4. Sistem prosleđuje unete podatke kontroloru na proveru.
+5. Kontroler šalje upit bazi podataka za proveru unetih pristupnih podataka.
+6. Baza podataka vraća podatke o korisniku.
+7. Sistem validira podatke i uspešno proverava ispravnost.
+8. Sistem otvara i prikazuje korisnički profil.
+9. Sistem obaveštava korisnika da je prijava uspešna.
 
 Alternativni tokovi:
 
