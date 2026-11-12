@@ -1,0 +1,38 @@
+Slučaj upotrebe: Upravljanje terminima
+
+Kratak opis: Pacijent može da zakaže ili otkaže svoj termin, dok doktor može da zakaže ili otkaže termin za pacijenta. Prilikom zakazivanja doktor može da navede nalaze koje pacijent treba da dostavi pre pregleda. 
+
+Učesnici: Doktor ili Pacijent
+
+Preduslovi: Sistem je u funkciji. Učesnik ima pristup internetu i prijavljen je na svoj nalog.
+
+Postuslovi: Izmena termina je sačuvana u bazi podataka. Ako korisnik ne potvrdi izmenu, stanje termina ostaje nepromenjeno.
+
+Osnovni tok:
+1. Korisnik otvara stranicu za upravljanje terminima.
+2. Sistem prikazuje zakazane termine korisnika.
+3. Korisnik bira da li želi da otkaže postojeći termin ili zakaže novi.
+4. Ukoliko korisnik želi da otkaže termin, osnovni tok se prebacuje na podtok P1.
+5. Ukoliko korisnik želi da zakaže još jedan termin, osnovni tok se prebacuje na podtok P2.
+6. Sistem prikazuje izabranu izmenu i traži potvrdu.
+7. Korisnik potvrđuje izmenu klikom na dugme „OK“.
+8. Sistem ažurira podatke o terminu u bazi podataka.
+9. Sistem obaveštava korisnika da je izmena uspešno sačuvana.
+
+Altermativni tok:
+A1: Izabrani termin više nije dostupan
+1. Sistem obaveštava korisnika da izabrani termin više nije dostupan.
+2. Tok se nastavlja u podtoku P2, gde korisnik bira drugi termin.
+
+Podtokovi: 
+P1: Otkazivanje zakazanog termina
+1. Korisnik bira svoj termin koji želi da otkaže.
+2. Ako je termin otkazao doktor, sistem obaveštava pacijenta o otkazivanju.
+3. Osnovni tok se nastavlja u koraku 6.
+P2: Zakazivanje novog termina
+1. Sistem prikazuje formular za zakazivanje.
+2. Korisnik unosi potrebne podatke.
+3. Ako termin zakazuje doktor, unosi i listu potrebnih analiza.
+4. Osnovni tok se nastavlja u koraku 6.
+Specijalni zahtevi: /
+Dodatne informacije: /
