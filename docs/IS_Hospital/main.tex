@@ -24,6 +24,7 @@
 \AddToHook{cmd/section/before}{\clearpage}
 
 \sloppy
+\usepackage{float}
  
 \begin{document}
 
@@ -73,13 +74,264 @@
 
 \section{Uvod}
 
-\section{Opis}
+Informacioni sistem bolnice razvija se sa ciljem da podrži osnovne procese povezane sa zakazivanjem i obavljanjem lekarskih pregleda. Sistem je namenjen pacijentima i doktorima, koji pristupaju svojim nalozima nakon prijave ili registracije.
 
-\section{Učesnici}
+Pacijent može da zakaže ili otkaže pregled, kao i da na svom nalogu vidi predstojeće preglede i potrebne analize. Doktor prilikom zakazivanja može da navede koje nalaze pacijent treba da dostavi pre pregleda, na primer rezultate krvne slike ili snimak. Pacijent zatim može da otpremi dokumenta na svoj nalog, gde ih doktor pregleda zajedno sa istorijom bolesti i ranijim zaključcima. Nakon pregleda, doktor unosi zaključak koji postaje deo evidencije pacijenta.
 
-\section{Alati}
+Motivacija za razvoj sistema je potreba da relevantni podaci budu pregledno dostupni doktoru tokom lečenja pacijenta. Pacijenti, naročito stariji, ne mogu uvek da se sete svih ranijih pregleda, dijagnoza i preporuka, dok dokumentacija iz različitih ustanova nije nužno objedinjena niti lako dostupna. Zbog toga doktor može da ostane bez informacija koje su važne za procenu zdravstvenog stanja pacijenta. Sistem nastoji da ovaj problem ublaži čuvanjem podataka o pregledima, nalazima i zaključcima na jednom mestu.
 
 \section{Dijagram slučajeva upotrebe}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{UML/use_case.png}
+    \caption{Dijagram slučajeva upotrebe informacionog sistema bolnice.}
+    \label{fig:dijagram-slucajeva-upotrebe}
+\end{figure}
+
+\section{Slučajevi upotrebe}
+\subsection{Prijava na sistem}
+
+\textbf{Slučaj upotrebe:} Prijava na sistem
+\textbf{Kratak opis:} Korisnik (doktor ili pacijent) unosi svoje pristupne podatke kako bi se autentifikovao i pristupio svom profilu u bolničkom informacionom sistemu.
+
+\textbf{Učesnici:} Doktor, Pacijent
+
+\textbf{Preduslovi:} Sistem je u funkciji. Korisnik ima registrovan nalog u bazi podataka i nalazi se na ekranu za prijavu.
+
+\textbf{Postuslovi (Uspeh):} Korisnik je uspešno prijavljen i preusmeren na svoj korisnički profil.
+
+\textbf{Postuslovi (Neuspeh):} Korisniku je prikazana poruka o grešci i ostaje na ekranu za prijavu.
+
+\textbf{Osnovni tok:}
+\begin{enumerate}
+    \item Korisnik pokreće opciju za prijavu.
+    \item Sistem učitava i prikazuje ekran (formu) za prijavu.
+    \item Korisnik unosi korisničko ime i lozinku, a zatim potvrđuje unos.
+    \item Sistem prosleđuje unete podatke kontroloru na proveru.
+    \item Kontroler šalje upit bazi podataka za proveru unetih pristupnih podataka.
+    \item Baza podataka vraća podatke o korisniku.
+    \item Sistem validira podatke i uspešno proverava ispravnost.
+    \item Sistem otvara i prikazuje korisnički profil.
+    \item Sistem obaveštava korisnika da je prijava uspešna.
+\end{enumerate}
+
+\textbf{Alternativni tokovi:}
+
+\textbf{A1: Neispravni pristupni podaci}
+
+Ukoliko u koraku 7 sistem utvrdi da korisničko ime ili lozinka nisu ispravni (\texttt{podaciIspravni == false}), sistem prikazuje poruku o grešci (pogrešni podaci) i osnovni tok se vraća na korak 3 (ponovni unos).
+
+\textbf{A2: Greška pri komunikaciji sa bazom / Korisnik ne postoji}
+
+Ukoliko u koraku 6 baza podataka vrati \texttt{null} ili dođe do greške pri pretrazi, sistem obaveštava korisnika da nalog ne postoji i vraća ga na ekran za prijavu (korak 3).
+
+\textbf{Podtokovi:} /
+
+\textbf{Specijalni slučajevi:} /
+
+\textbf{Dodatne informacije:} /
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{UML/Aktivnosti/Prijava_na_sistem.png}
+    \caption{Dijagram prikazuje tok prijave doktora ili pacijenta, od unosa pristupnih podataka do provere naloga i prikaza profila ili poruke o grešci.}
+    \label{fig:prijava-na-sistem}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{UML/Sekvence/Prijava_na_sistem_sekv.png}
+    \caption{Dijagram sekvenci prikazuje razmenu poruka između korisnika, sistema, kontrolera i baze podataka tokom prijave.}
+    \label{fig:sekvenca-prijava-na-sistem}
+\end{figure}
+
+\subsection{Upravljanje terminima}
+
+\textbf{Slučaj upotrebe:} Upravljanje terminima
+
+\textbf{Kratak opis:} Pacijent može da zakaže ili otkaže svoj termin, dok doktor može da zakaže ili otkaže termin za pacijenta. Prilikom zakazivanja doktor može da navede nalaze koje pacijent treba da dostavi pre pregleda.
+
+\textbf{Učesnici:} Doktor ili Pacijent
+
+\textbf{Preduslovi:} Sistem je u funkciji. Učesnik ima pristup internetu i prijavljen je na svoj nalog.
+
+\textbf{Postuslovi:} Izmena termina je sačuvana u bazi podataka. Ako korisnik ne potvrdi izmenu, stanje termina ostaje nepromenjeno.
+
+\textbf{Osnovni tok:}
+\begin{enumerate}
+    \item Korisnik otvara stranicu za upravljanje terminima.
+    \item Sistem prikazuje zakazane termine korisnika.
+    \item Korisnik bira da li želi da otkaže postojeći termin ili zakaže novi.
+    \item Ukoliko korisnik želi da otkaže termin, osnovni tok se prebacuje na podtok P1.
+    \item Ukoliko korisnik želi da zakaže još jedan termin, osnovni tok se prebacuje na podtok P2.
+    \item Sistem prikazuje izabranu izmenu i traži potvrdu.
+    \item Korisnik potvrđuje izmenu klikom na dugme „OK“.
+    \item Sistem ažurira podatke o terminu u bazi podataka.
+    \item Sistem obaveštava korisnika da je izmena uspešno sačuvana.
+\end{enumerate}
+
+\textbf{Alternativni tok:}
+
+\textbf{A1: Izabrani termin više nije dostupan}
+\begin{enumerate}
+    \item Sistem obaveštava korisnika da izabrani termin više nije dostupan.
+    \item Tok se nastavlja u podtoku P2, gde korisnik bira drugi termin.
+\end{enumerate}
+
+\textbf{Podtokovi:}
+
+\textbf{P1: Otkazivanje zakazanog termina}
+\begin{enumerate}
+    \item Korisnik bira svoj termin koji želi da otkaže.
+    \item Ako je termin otkazao doktor, sistem obaveštava pacijenta o otkazivanju.
+    \item Osnovni tok se nastavlja u koraku 6.
+\end{enumerate}
+
+\textbf{P2: Zakazivanje novog termina}
+\begin{enumerate}
+    \item Sistem prikazuje formular za zakazivanje.
+    \item Korisnik unosi potrebne podatke.
+    \item Ako termin zakazuje doktor, unosi i listu potrebnih analiza.
+    \item Osnovni tok se nastavlja u koraku 6.
+\end{enumerate}
+
+\textbf{Specijalni zahtevi:} /
+
+\textbf{Dodatne informacije:} /
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{UML/Aktivnosti/Upravljanje_terminima.png}
+    \caption{Dijagram aktivnosti za slučaj upotrebe „Upravljanje terminima“.}
+    \label{fig:aktivnosti-upravljanje-terminima}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{UML/Sekvence/upravljanje_terminima_sekv.png}
+    \caption{Dijagram sekvenci za slučaj upotrebe „Upravljanje terminima“.}
+    \label{fig:sekvence-upravljanje-terminima}
+\end{figure}
+
+\subsection{Upravljanje analizama pregleda}
+
+\textbf{Slučaj upotrebe:} Upravljanje analizama pregleda
+
+\textbf{Kratak opis:} Korisnik pristupa listi pregleda, bira pregled i pripadajuće analize, te vrši upload fajla sa rezultatima. Sistem vrši validaciju fajla, čuva rezultat u bazi i ažurira status analize.
+
+\textbf{Učesnici:} Korisnik
+
+\textbf{Preduslovi:} Sistem je u funkciji. Korisnik je uspešno prijavljen na sistem. Postoje kreirani pregledi i analize u bazi podataka.
+
+\textbf{Postuslovi:} Rezultat analize je uspešno kreiran i sačuvan. Status analize je ažuriran. Korisnik je obavešten o uspešnom ishodu.
+
+\textbf{Osnovni tok:}
+\begin{enumerate}
+    \item Korisnik zahteva prikaz liste pregleda (otvara listu pregleda).
+    \item Sistem učitava i prikazuje listu dostupnih pregleda.
+    \item Korisnik bira konkretan pregled.
+    \item Sistem dobavlja i prikazuje listu analiza za izabrani pregled.
+    \item Korisnik bira analizu i prilaže odgovarajući fajl sa rezultatima.
+    \item Sistem vrši validaciju priloženog fajla.
+    \item Sistem potvrdno utvrđuje da je fajl validan.
+    \item Sistem kreira objekat rezultata i čuva unete podatke.
+    \item Sistem ažurira status obrađene analize.
+    \item Sistem proverava da li ima još analiza koje treba obraditi za taj pregled.
+    \item Utvrđeno je da nema više analiza, te sistem prikazuje poruku uspeha korisniku.
+\end{enumerate}
+
+\textbf{Alternativni tokovi:}
+
+\textbf{A1: Fajl nije validan}
+
+Ukoliko u koraku 7 sistem utvrdi da fajl nije validan, sistem obaveštava korisnika prikazom poruke o grešci (poruka neuspeha). Tok se nastavlja u koraku 5, gde korisnik može ponovo izabrati analizu i fajl.
+
+\textbf{A2: Postoji još analiza za obradu}
+
+Ukoliko u koraku 10 sistem utvrdi da ima još preostalih analiza za izabrani pregled, tok se vraća na korak 5 kako bi korisnik uneo fajl za sledeću analizu.
+
+\textbf{Podtokovi:} /
+
+\textbf{Specijalni slučajevi:} /
+
+\textbf{Dodatne informacije:} /
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{UML/Aktivnosti/Upravljanje_analizama_pregleda.png}
+    \caption{Dijagram aktivnosti za slučaj upotrebe „Upravljanje analizama pregleda“.}
+    \label{fig:aktivnosti-upravljanje-analizama}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{UML/Sekvence/upravljanje_analizama_pregleda_sekv.png}
+    \caption{Dijagram sekvenci za slučaj upotrebe „Upravljanje analizama pregleda“.}
+    \label{fig:sekvence-upravljanje-analizama}
+\end{figure}
+
+\subsection{Izveštaj}
+
+\textbf{Slučaj upotrebe:} Izveštaj
+
+\textbf{Kratak opis:} Doktor pregleda istoriju bolesti pacijenta i nalaze koje je pacijent upload-ovao, a zatim popunjava i kači izveštaj.
+
+\textbf{Učesnici:} Doktor
+
+\textbf{Preduslovi:} Sistem je u funkciji. Doktor je prijavljen na sistem. Pacijent postoji u sistemu.
+
+\textbf{Postuslovi:} Izveštaj je uspešno okačen. Baza podataka je uspešno ažurirana. Pacijent je obavešten o novom izveštaju.
+
+\textbf{Osnovni tok:}
+\begin{enumerate}
+    \item Doktor bira pacijenta.
+    \item Sistem učitava istoriju bolesti pacijenta i prikazuje je doktoru.
+    \item Doktor pregleda istoriju bolesti.
+    \item Sistem proverava da li postoje nalazi koje je pacijent upload-ovao.
+    \item Sistem prikazuje listu upload-ovanih nalaza.
+    \item Doktor pregleda nalaze.
+    \item Doktor popunjava polja izveštaja (dijagnoza, terapija, napomena).
+    \item Doktor šalje izveštaj klikom na dugme „okači izveštaj“.
+    \item Sistem validira izveštaj.
+    \item Sistem upisuje izveštaj u karton pacijenta u bazi podataka.
+    \item Sistem obaveštava pacijenta o novom izveštaju.
+    \item Sistem obaveštava doktora da je izveštaj uspešno okačen.
+\end{enumerate}
+
+\textbf{Alternativni tokovi:}
+
+\textbf{A1: Pacijent nema upload-ovane nalaze}
+
+Ukoliko u koraku 4 sistem utvrdi da pacijent nema upload-ovanih nalaza, sistem obaveštava doktora o tome i osnovni tok se nastavlja u koraku 7.
+
+\textbf{A2: Nevalidan unos podataka}
+
+Ukoliko u koraku 9 sistem utvrdi da je neko obavezno polje ostalo prazno ili da je unet pogrešan podatak, sistem označava to polje i obaveštava doktora. Osnovni tok se nastavlja u koraku 7.
+
+\textbf{A3: Greška pri čuvanju izveštaja}
+
+Ukoliko u koraku 10 dođe do greške pri upisu u bazu podataka, sistem obaveštava doktora da izveštaj nije sačuvan i osnovni tok se nastavlja u koraku 8.
+
+\textbf{Podtokovi:} /
+
+\textbf{Specijalni slučajevi:} /
+
+\textbf{Dodatne informacije:} /
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{UML/Aktivnosti/Izvestaj.png}
+    \caption{Dijagram aktivnosti za slučaj upotrebe „Izveštaj“.}
+    \label{fig:aktivnosti-izvestaj}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{UML/Sekvence/izvestaj_sekv.png}
+    \caption{Dijagram sekvenci za slučaj upotrebe „Izveštaj“.}
+    \label{fig:sekvence-izvestaj}
+\end{figure}
 
 
 
