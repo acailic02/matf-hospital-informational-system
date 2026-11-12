@@ -1,0 +1,27 @@
+Slucaj upotrebe: Upravljanje analizama pregleda
+Kratak opis: Korisnik pristupa listi pregleda, bira pregled i pripadajuće analize, te vrši upload fajla sa rezultatima. Sistem vrši validaciju fajla, čuva rezultat u bazi i ažurira status analize.
+Ucesnici: Korisnik
+Preduslovi: Sistem je u funkciji. Korisnik je uspešno prijavljen na sistem. Postoje kreirani pregledi i analize u bazi podataka.
+Postuslovi: Rezultat analize je uspešno kreiran i sačuvan. Status analize je ažuriran. Korisnik je obavešten o uspešnom ishodu.
+
+Osnovni tok:
+
+1. Korisnik zahteva prikaz liste pregleda (otvara listu pregleda).
+2. Sistem učitava i prikazuje listu dostupnih pregleda.
+3. Korisnik bira konkretan pregled.
+4. Sistem dobavlja i prikazuje listu analiza za izabrani pregled.
+5. Korisnik bira analizu i prilaže odgovarajući fajl sa rezultatima.
+6. Sistem vrši validaciju priloženog fajla.
+7. Sistem potvrdno utvrđuje da je fajl validan.
+8. Sistem kreira objekat rezultata i čuva unete podatke.
+9. Sistem ažurira status obrađene analize.
+10. Sistem proverava da li ima još analiza koje treba obraditi za taj pregled.
+11. Utvrđeno je da nema više analiza, te sistem prikazuje poruku uspeha korisniku.
+
+Alternativni tokovi:
+
+A1: Fajl nije validan
+Ukoliko u koraku 7 sistem utvrdi da fajl nije validan, sistem obaveštava korisnika prikazom poruke o grešci (poruka neuspeha). Tok se nastavlja u koraku 5, gde korisnik može ponovo izabrati analizu i fajl.
+
+A2: Postoji još analiza za obradu
+Ukoliko u koraku 10 sistem utvrdi da ima još preostalih analiza za izabrani pregled, tok se vraća na korak 5 kako bi korisnik uneo fajl za sledeću analizu.

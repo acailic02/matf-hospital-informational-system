@@ -1,0 +1,26 @@
+Slučaj upotrebe: Prijava na sistem (Login)
+Kratak opis: Korisnik (doktor ili pacijent) unosi svoje pristupne podatke kako bi se autentifikovao i pristupio svom profilu u bolničkom informacionom sistemu.
+Učesnici: Doktor, Pacijent
+Preduslovi: Sistem je u funkciji. Korisnik ima registrovan nalog u bazi podataka i nalazi se na ekranu za prijavu.
+Postuslovi (Uspeh): Korisnik je uspešno prijavljen i preusmeren na svoj korisnički profil.
+Postuslovi (Neuspeh): Korisniku je prikazana poruka o grešci i ostaje na ekranu za prijavu.
+
+Osnovni tok:
+
+1. Korisnik pokreće opciju za prijavu.
+2. Sistem učitava i prikazuje ekran (formu) za prijavu.
+3. Korisnik unosi korisničko ime i lozinku, a zatim potvrđuje unos.
+4. Sistem prosleđuje unete podatke kontroloru na proveru.
+5. Kontroler šalje upit bazi podataka za proveru unetih pristupnih podataka.
+6. Baza podataka vraća podatke o korisniku.
+7. Sistem validira podatke i uspešno proverava ispravnost.
+8. Sistem otvara i prikazuje korisnički profil.
+9. Sistem obaveštava korisnika da je prijava uspešna.
+
+Alternativni tokovi:
+
+A1: Neispravni pristupni podaci
+Ukoliko u koraku 7 sistem utvrdi da korisničko ime ili lozinka nisu ispravni (podaciIspravni == false), sistem prikazuje poruku o grešci (pogrešni podaci) i osnovni tok se vraća na korak 3 (ponovni unos).
+
+A2: Greška pri komunikaciji sa bazom / Korisnik ne postoji
+Ukoliko u koraku 6 baza podataka vrati null ili dođe do greške pri pretrazi, sistem obaveštava korisnika da nalog ne postoji i vraća ga na ekran za prijavu (korak 3).
