@@ -1,6 +1,6 @@
 Slucaj upotrebe: Izvestaj
-Kratak opis: Doktor pregleda istoriju bolesti pacijenta i nalaze koje je pacijent upload-ovao, a zatim popunjava i kaci izvestaj.
-Ucesnici: Doktor
+Kratak opis: Doktor pregleda istoriju bolesti pacijenta i nalaze koje je pacijent otpremio, po potrebi zahteva dodatne analize, a zatim popunjava i kaci izvestaj.
+Ucesnici: Doktor - lekar zaposlen u bolnici koji obavlja preglede pacijenata. Ima uvid u istoriju bolesti pacijenta, ranije izvestaje i otpremljene nalaze, moze da zahteva od pacijenta dodatne analize i nakon obavljenog pregleda pise izvestaj koji postaje deo kartona pacijenta.
 Preduslovi: Sistem je u funkciji. Doktor je prijavljen na sistem. Pacijent postoji u sistemu.
 Postuslovi: Izvestaj je uspesno okacen. Baza podataka je uspesno azurirana. Pacijent je obavesten o novom izvestaju.
 
@@ -8,23 +8,37 @@ Osnovni tok:
 1. Doktor bira pacijenta.
 2. Sistem ucitava istoriju bolesti pacijenta i prikazuje je doktoru.
 3. Doktor pregleda istoriju bolesti.
-4. Sistem proverava da li postoje nalazi koje je pacijent upload-ovao.
-5. Sistem prikazuje listu upload-ovanih nalaza.
-6. Doktor pregleda nalaze.
-7. Doktor popunjava polja izvestaja (dijagnoza, terapija, napomena).
-8. Doktor salje izvestaj klikom na dugme okaci izvestaj.
-9. Sistem validira izvestaj.
-10. Sistem upisuje izvestaj u karton pacijenta u bazi podataka.
-11. Sistem obavestava pacijenta o novom izvestaju.
-12. Sistem obavestava doktora da je izvestaj uspesno okacen.
+4. Ukoliko na osnovu istorije bolesti i obavljenog pregleda proceni da su mu potrebne dodatne analize, doktor ih zahteva od pacijenta i osnovni tok se prebacuje na podtok P1.
+5. Sistem proverava da li postoje nalazi koje je pacijent otpremio.
+6. Sistem prikazuje listu otpremljenih nalaza.
+7. Doktor pregleda nalaze.
+8. Doktor popunjava polja izvestaja.
+9. Doktor salje izvestaj klikom na dugme okaci izvestaj.
+10. Sistem validira izvestaj.
+11. Sistem upisuje izvestaj u karton pacijenta u bazi podataka.
+12. Sistem obavestava pacijenta o novom izvestaju.
+13. Sistem obavestava doktora da je izvestaj uspesno okacen.
 
 Alternativni tokovi:
 
-A1: Pacijent nema upload-ovane nalaze
-Ukoliko u koraku 4 sistem utvrdi da pacijent nema upload-ovanih nalaza, sistem obavestava doktora o tome i osnovni tok se nastavlja u koraku 7.
+A1: Pacijent nema otpremljene nalaze
+Ukoliko u koraku 5 sistem utvrdi da pacijent nema otpremljenih nalaza, sistem obavestava doktora o tome i osnovni tok se nastavlja u koraku 8.
 
 A2: Nevalidan unos podataka
-Ukoliko u koraku 9 sistem utvrdi da je neko obavezno polje ostalo prazno ili da je unet pogresan podatak, sistem oznacava to polje i obavestava doktora. Osnovni tok se nastavlja u koraku 7.
+Ukoliko u koraku 10 sistem utvrdi da je neko obavezno polje ostalo prazno ili da je unet pogresan podatak, sistem oznacava to polje i obavestava doktora. Osnovni tok se nastavlja u koraku 8.
 
 A3: Greska pri cuvanju izvestaja
-Ukoliko u koraku 10 dodje do greske pri upisu u bazu podataka, sistem obavestava doktora da izvestaj nije sacuvan i osnovni tok se nastavlja u koraku 8.
+Ukoliko u koraku 11 dodje do greske pri upisu u bazu podataka, sistem obavestava doktora da izvestaj nije sacuvan i osnovni tok se nastavlja u koraku 9.
+
+Podtokovi:
+
+P1: Zahtevanje dodatnih analiza
+1. Doktor bira analize koje pacijent treba da uradi i dostavi.
+2. Sistem cuva zahtev u bazi podataka i dodaje trazene analize na listu potrebnih analiza pacijenta.
+3. Sistem obavestava pacijenta o trazenim analizama.
+4. Izrada izvestaja se odlaze dok pacijent ne otpremi rezultate trazenih analiza kroz slucaj upotrebe Upravljanje analizama pregleda.
+5. Osnovni tok se nastavlja u koraku 5.
+
+Specijalni slucajevi: Doktor je izvrsio pregled pacijenta. Izvestaj se odnosi na obavljeni pregled i ne moze se okaciti pre nego sto je pregled izvrsen.
+
+Dodatne informacije: Izvestaj sadrzi polja dijagnoza, terapija i napomena. Analize koje doktor moze da zahteva od pacijenta su, na primer, krvna slika ili snimak.
