@@ -1,0 +1,26 @@
+Slučaj upotrebe: Otkazivanje termina pregleda
+
+Kratak opis: Korisnik može da otkaže termin zakazanog pregleda.
+
+Učesnici: Korisnik
+
+Preduslovi: Sistem je u funkciji. Učesnik ima pristup internetu, prijavljen je na svoj nalog i ima bar jedan zakazan pregled.
+
+Postuslovi: Status izabranog termina je promenjen u „otkazan“. Ako učesnik ne potvrdi otkazivanje, stanje termina ostaje nepromenjeno.
+
+Osnovni tok:
+1. Korisnik otvara stranicu sa zakazanim terminima.
+2. Sistem prikazuje aktivne termine kojima korisnik može da upravlja.
+3. Korisnik bira termin koji želi da otkaže.
+4. Sistem prikazuje izabranu izmenu i traži potvrdu.
+5. Korisnik potvrđuje otkazivanje klikom na dugme „Potvrdi“.
+6. Sistem menja status termina u "otkazan".
+7. Sistem obaveštava korisnika da je izmena uspešno sačuvana.
+
+Altermativni tok:/
+
+Podtokovi:/
+
+Specijalni zahtevi: /
+
+Dodatne informacije: Korisnik može da bude doktor, medicinska sestra ili pacijent.

@@ -1,0 +1,32 @@
+Slučaj upotrebe: Zakazivanje termina pregleda
+
+Kratak opis: Korisnik može da zakaže termin pregleda popunjavanjem formulara.
+
+Učesnici: Korisnik
+
+Preduslovi: Sistem je u funkciji. Učesnik ima pristup internetu i prijavljen je na svoj nalog.
+
+Postuslovi: Novi termin je sačuvan u bazi podataka sa statusom „zakazan“. Ako korisnik ne potvrdi zakazivanje, termin se ne čuva.
+
+Osnovni tok:
+1. Korisnik otvara stranicu za zakazivanje termina.
+2. Sistem prikazuje dostupne termine.
+3. Korisnik bira termin koji želi da zakaže.
+4. Sistem prikazuje formular za zakazivanje.
+5. Korisnik popunjava formular.
+6. Sistem proverava podatke iz formulara i dostupnost izabranog termina.
+7. Sistem prikazuje podatke o terminu i traži potvrdu.
+8. Korisnik potvrđuje zakazivanje klikom na dugme „Potvrdi“.
+9. Sistem čuva termin u bazi podataka.
+10. Sistem obaveštava korisnika da je termin uspešno zakazan.
+
+Alternativni tok:
+A1: Izabrani termin više nije dostupan
+1. Sistem obaveštava korisnika da termin više nije dostupan.
+2. Tok se vraća na korak 2 osnovnog toka, gde korisnik bira drugi termin.
+
+Podtokovi: /
+
+Specijalni zahtevi: /
+
+Dodatne informacije: Korisnik može da bude doktor, medicinska sestra ili pacijent. Formular sadrži podatke o pacijentu, doktoru ili specijalisti, kao i izabrani datum i vreme pregleda.

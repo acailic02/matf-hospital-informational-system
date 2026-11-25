@@ -1,0 +1,27 @@
+Slučaj upotrebe: Naručivanje lekova za dopunu zaliha
+
+Kratak opis: Farmaceut naručuje lekove koji nedostaju ili ih nema dovoljno na zalihama.
+
+Učesnici: Farmaceut
+
+Preduslovi: Sistem je u funkciji. Farmaceut ima pristup internetu i prijavljen je na svoj nalog.
+
+Postuslovi: Narudžbina lekova je evidentirana u bazi podataka. Stanje zaliha se ažurira nakon prijema lekova.
+
+Osnovni tok:
+1. Farmaceut otvara stranicu za upravljanje zalihama.
+2. Sistem prikazuje lekove kojih nema dovoljno ili ih nema na zalihama.
+3. Farmaceut bira lek koji želi da naruči.
+4. Farmaceut unosi količinu za naručivanje.
+5. Sistem prikazuje podatke o narudžbini i traži potvrdu.
+6. Farmaceut potvrđuje narudžbinu klikom na dugme „Potvrdi“.
+7. Sistem evidentira narudžbinu.
+8. Sistem obaveštava farmaceuta da je narudžbina uspešno sačuvana.
+
+Alternativni tok: /
+
+Podtokovi: /
+
+Specijalni zahtevi: /
+
+Dodatne informacije: Formular za naručivanje sadrži naziv leka i količinu za naručivanje. Stanje zaliha se ne povećava samim naručivanjem, već tek kada lekovi budu primljeni.

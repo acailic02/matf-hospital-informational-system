@@ -1,0 +1,34 @@
+Slučaj upotrebe: Izdavanje lekova pacijentu  
+
+Kratak opis: Farmaceut evidentira izdavanje leka pacijentu.
+ 
+Učesnici: Farmaceut
+ 
+Preduslovi: Sistem je u funkciji. Farmaceut ima pristup internetu i prijavljen je na svoj nalog. Pacijent i lek su evidentirani u sistemu. 
+ 
+Postuslovi: Izdavanje leka je evidentirano u bazi podataka, a stanje zaliha je ažurirano.
+  
+Osnovni tok:
+ 
+1. Farmaceut otvara stranicu za izdavanje lekova.
+2. Sistem prikazuje pacijente i lekove dostupne za izdavanje.
+3. Farmaceut bira pacijenta i lek koji izdaje. 
+4. Farmaceut unosi količinu leka. 
+5. Sistem prikazuje podatke o izdavanju i traži potvrdu. 
+6. Farmaceut potvrđuje izdavanje klikom na dugme „Potvrdi“. 
+7. Sistem evidentira izdavanje i ažurira stanje zaliha. 
+8. Sistem obaveštava farmaceuta da je izdavanje uspešno sačuvano.
+
+Alternativni tok:
+A1: Nedovoljna količina leka na zalihama
+
+1. Sistem obaveštava farmaceuta da nema dovoljno leka na zalihama. 
+2. Izdavanje se ne evidentira.
+3. Osnovni tok se nastavlja u koraku 3 iz kog farmaceut može da odabere alternativni lek.
+
+Podtokovi: /
+
+Specijalni zahtevi: /
+
+Dodatne informacije: Ako se lek izdaje na osnovu terapije koju je propisao doktor, farmaceut bira lek iz terapije pacijenta.
+
