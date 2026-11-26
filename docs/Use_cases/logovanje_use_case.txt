@@ -1,0 +1,23 @@
+Slučaj upotrebe: Logovanje
+Kratak opis: Korisnik unosi svoje pristupne podatke kako bi se prijavio na sistem i pristupio svom nalogu.
+Učesnici: Korisnik
+Preduslovi: Sistem je u funkciji. Korisnik poseduje registrovan nalog na sistemu i ima obezbeđen pristup internetu.
+Postuslovi: Korisnik je uspešno prijavljen na sistem i prikazan mu je početni ekran njegovog naloga.
+Dodatne informacije: Sistem može ograničiti broj uzastopnih neuspešnih pokušaja prijave iz bezbednosnih razloga.
+
+Osnovni tok:
+
+1. Korisnik pokreće opciju za prijavu na sistem.
+2. Sistem prikazuje ekran za prijavu.
+3. Korisnik unosi korisničko ime i lozinku nako čega potvrđuje prijavu.
+4. Sistem proverava unete pristupne podatke.
+5. Sistem potvrđuje ispravnost pristupnih podataka.
+6. Sistem prikazuje korisnički nalog i obaveštava korisnika o uspešnoj prijavi.
+
+Alternativni tokovi:
+
+A1: Neuspešna prijava
+Ukoliko u koraku 4 ili 5 sistem utvrdi da uneti podaci nisu ispravni:
+
+1. Sistem obaveštava korisnika da prijava nije uspela i da su podaci pogrešni.
+2. Korisnik ostaje neprijavljen i tok se vraća na korak 3 radi ponovnog unosa.

@@ -1,0 +1,29 @@
+Slučaj upotrebe: Registracija
+Kratak opis: Korisnik unosi potrebne lične podatke kako bi kreirao novi nalog na sistemu.
+Učesnici: Korisnik
+Preduslovi: Sistem je u funkciji. Korisnik nema aktivan nalog na sistemu i ima obezbeđen pristup internetu.
+Postuslovi: Novi korisnički nalog je uspešno kreiran i korisnik je obavešten o uspešnoj registraciji.
+Dodatne informacije: Lozinka mora da ispunjava zadate bezbednosne kriterijume sistema.
+
+Osnovni tok:
+
+1. Korisnik pokreće opciju za registraciju.
+2. Sistem prikazuje ekran za registraciju.
+3. Korisnik unosi tražene podatke i potvrđuje registraciju.
+4. Sistem proverava ispravnost i potpunost unetih podataka i da li korisničko ime već postoji.
+5. Sistem potvrđuje da su podaci ispravni i da korisničko ime nije zauzeto.
+6. Sistem kreira korisnički nalog i obaveštava korisnika o uspešnoj registraciji.
+
+Alternativni tokovi:
+
+A1: Neispravni ili nepotpuni podaci
+Ukoliko u koraku 4 ili 5 sistem utvrdi da neka obavezna polja nisu popunjena ili da podaci nisu u ispravnom formatu:
+
+1. Sistem obaveštava korisnika o neispravnim poljima i razlogu greške.
+2. Tok se vraća na korak 3 radi ispravke unetih podataka.
+
+A2: Korisničko ime već postoji
+Ukoliko u koraku 4 ili 5 sistem utvrdi da uneto korisničko ime već koristi drugi nalog:
+
+1. Sistem obaveštava korisnika da je korisničko ime zauzeto.
+2. Tok se vraća na korak 3 radi unosa drugog korisničkog imena.

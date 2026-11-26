@@ -1,0 +1,30 @@
+Slučaj upotrebe: Traženje nalaza
+Kratak opis: Pacijent pretražuje i bira željene nalaze kako bi ih pregledao ili preuzeo u okviru sistema.
+Učesnici: Pacijent
+Preduslovi: Sistem je u funkciji. Pacijent je prijavljen na sistem i ima obezbeđen pristup internetu.
+Postuslovi: Pacijentu su prikazani traženi nalazi i omogućeno njihovo pregledanje ili preuzimanje.
+Dodatne informacije: Nalazi se prikazuju u skladu sa pravima pristupa i raspoloživošću u sistemu.
+
+Osnovni tok:
+
+1. Pacijent pokreće opciju za pretragu i pregled nalaza.
+2. Sistem prikazuje ekran za traženje nalaza.
+3. Pacijent unosi kriterijume pretrage i pokreće pretragu.
+4. Sistem pretražuje dostupne nalaze prema zadatim kriterijumima.
+5. Sistem prikazuje listu pronađenih nalaza.
+6. Pacijent bira željeni nalaz sa liste.
+7. Sistem otvara i prikazuje izabrani nalaz pacijentu.
+
+Alternativni tokovi:
+
+A1: Nema pronađenih nalaza
+Ukoliko u koraku 4 ili 5 sistem ne pronađe nijedan nalaz koji odgovara zadatim kriterijumima:
+
+1. Sistem obaveštava pacijenta da nema pronađenih nalaza za zadate kriterijume.
+2. Tok se vraća na korak 3 radi izmene kriterijuma pretrage.
+
+A2: Nedostupan izabrani nalaz
+Ukoliko u koraku 7 sistem ne može da otvori izabrani nalaz:
+
+1. Sistem obaveštava pacijenta da izabrani nalaz trenutno nije dostupan za prikaz.
+2. Tok se vraća na korak 5 radi izbora drugog nalaza.
